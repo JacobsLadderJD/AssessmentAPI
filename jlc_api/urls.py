@@ -28,5 +28,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
-    path('user/login/', auth_views.obtain_auth_token) # used for login
+    path('user/login/', auth_views.obtain_auth_token), # used for login
+    path('authenticated/', views.AuthenticatedView.as_view(), name='authenticated'),  
 ]
