@@ -20,3 +20,5 @@ node_modules
 npm-debug.log
 jlcenv
 *.sqlite3
+jlc_api/quickstart/migrations/[0-9][0-9][0-9][0-9]_*.py
+
