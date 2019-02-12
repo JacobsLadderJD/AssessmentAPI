@@ -2,8 +2,11 @@
 
 # Create your views here.
 from django.contrib.auth.models import User, Group
+from django.core import serializers
+from django.db.models import Q
 from django.http import HttpResponse
 from rest_framework import viewsets
+from jlc_api.quickstart import models
 from jlc_api.quickstart.serializers import UserSerializer, GroupSerializer
 
 from rest_framework.permissions import IsAuthenticated
@@ -37,5 +40,18 @@ class AuthenticatedView(APIView):
 
 # Returns students with the substring included their name
 def studentsWithName(request, substring):
-    # Stub
-    return HttpResponse('No students')
+
+    # If there is a partial student name to search
+    if substring:
+        # QuerySet of student with substring in first or last name
+        students = models.Student.objects.filter( \
+                Q(firstname__icontains=substring) | \
+                Q(lastname__icontains=substring))
+    else:
+        # If no substring to match, QuerySet of all students
+        students = models.Student.objects.all()
+
+    serialized = serializers.serialize('json', students, \
+            fields=('firstname','lastname'))
+    return HttpResponse(serialized)
+
