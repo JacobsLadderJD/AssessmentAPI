@@ -2,6 +2,7 @@
 
 # Create your views here.
 from django.contrib.auth.models import User, Group
+from django.http import HttpResponse
 from rest_framework import viewsets
 from jlc_api.quickstart.serializers import UserSerializer, GroupSerializer
 
@@ -33,3 +34,8 @@ class AuthenticatedView(APIView):
     def get(self, request):
         content = {'message': 'Authenticated!'}
         return Response(content)
+
+# Returns students with the substring included their name
+def studentsWithName(request, substring):
+    # Stub
+    return HttpResponse('No students')

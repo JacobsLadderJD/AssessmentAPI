@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
@@ -30,4 +31,5 @@ urlpatterns = [
         include('rest_framework.urls', namespace='rest_framework')),
     path('user/login/', auth_views.obtain_auth_token), # used for login
     path('authenticated/', views.AuthenticatedView.as_view(), name='authenticated'),  
+    url(r'^students/(.*)', views.studentsWithName)
 ]
