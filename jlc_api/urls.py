@@ -27,6 +27,7 @@ router.register(r'groups', views.GroupViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
+    url(r'^admin/', admin.site.urls),
     path('api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
     path('user/login/', auth_views.obtain_auth_token), # used for login
