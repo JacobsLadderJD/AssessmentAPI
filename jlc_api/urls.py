@@ -23,6 +23,8 @@ from jlc_api.quickstart import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'students', views.StudentViewSet)
+router.register(r'evaluations', views.EvaluationViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
@@ -31,6 +33,6 @@ urlpatterns = [
     path('api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
     path('user/login/', auth_views.obtain_auth_token), # used for login
-    path('authenticated/', views.AuthenticatedView.as_view(), name='authenticated'),  
-    url(r'^students/(.*)', views.studentsWithName)
+    path('authenticated/', views.AuthenticatedView.as_view(), name='authenticated'),
+    # url(r'^students/(.*)', views.studentsWithName)
 ]
