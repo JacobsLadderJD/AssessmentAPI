@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from rest_framework import viewsets
 from jlc_api.quickstart import models
-import jlc_api.quickstart.serializers as cerealizers
+import jlc_api.quickstart.serializers as local_serializers
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -21,7 +21,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
 
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = cerealizers.UserSerializer
+    serializer_class = local_serializers.UserSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -29,7 +29,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
-    serializer_class = cerealizers.GroupSerializer
+    serializer_class = local_serializers.GroupSerializer
 
 class AuthenticatedView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -40,11 +40,11 @@ class AuthenticatedView(APIView):
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = models.Student.objects.all()
-    serializer_class = cerealizers.StudentSerializer
+    serializer_class = local_serializers.StudentSerializer
 
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluation.objects.all()
-    serializer_class = cerealizers.EvaluationSerializer
+    serializer_class = local_serializers.EvaluationSerializer
 
 # Returns students with the substring included their name
 def studentsWithName(request, substring):
