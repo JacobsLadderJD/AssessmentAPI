@@ -45,3 +45,7 @@ class Evaluator(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     # Currently stub - more to be added
+
+    # Name to be displayed in admin
+    def __str__(self):
+        return str(self.first_name) + ' ' + str(self.last_name)
