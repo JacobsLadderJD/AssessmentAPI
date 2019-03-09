@@ -11,13 +11,28 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 class Student(models.Model):
-    firstname = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
-    birthday = models.DateField()
-    gender = models.CharField(max_length=1, choices=[('M','Male'), ('F','Female')])
-    diagnosis = models.CharField(max_length=50)
-    status = models.CharField(max_length=50)
+    code = models.CharField(max_length=4, blank=True, choices=[
+            ('ADHD','Attention-Deficit/Hyperactivity Disorder'),
+            ('ASD','Autism Spectrum Disorder'),
+            ('BI1','Brain Injury Level 1'),
+            ('BI2','Brain Injury Level 2'),
+            ('BI3','Brain Injury Level 3'),
+            ('DS','Down Syndrome'),
+            ('EDBS','Emotional/Behavioral Disorder'),
+            ('GD','Global Delay'),
+            ('LD','Learning Delay'),
+            ('PDD','Pervasive Developmental Disorder')])
+    status = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    birthdate = models.DateField()
+    gender = models.CharField(max_length=1, choices=[
+        ('M','Male'), ('F','Female')])
     # One-to-many relationship to Evaluation in definition of Evaluation
+
+    # Name to be displayed in admin
+    def __str__(self):
+        return str(self.first_name) + ' ' + str(self.last_name)
 
 class Evaluation(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
