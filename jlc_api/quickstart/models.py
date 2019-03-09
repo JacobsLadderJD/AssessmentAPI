@@ -40,3 +40,8 @@ class Evaluation(models.Model):
     evaluator = models.CharField(max_length=50)
     code = models.CharField(max_length=20)
     # Currently stub - more to be added
+
+class Evaluator(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    # Currently stub - more to be added
