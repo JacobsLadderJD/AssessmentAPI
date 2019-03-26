@@ -1,5 +1,30 @@
 # All of this is adapted from https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
 
+# MAC INSTRUCTIONS ============================================================ 
+
+# If you do not have Homebrew installed, look up how to install it first, then install it, then continue.
+
+# If you have not followed the following instructions before, do the following: Go to your AssessmentAPI folder, and run all of the following commands in order:
+
+rm db.sqlite3
+brew install postgresql
+brew services start postgresql
+psql postgres
+CREATE ROLE jlcassessmentuser WITH PASSWORD 'jacobsladder';
+ALTER ROLE jlcassessmentuser SET client_encoding TO 'utf8';
+ALTER ROLE jlcassessmentuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE jlcassessmentuser SET timezone TO 'UTC';
+CREATE DATABASE jlcassessment;
+GRANT ALL PRIVILEGES ON DATABASE jlcassessment TO jlcassessmentuser;
+\q
+brew services stop postgresql
+source yourpersonalenvpathhere/bin/activate
+pip install psycopg2
+python manage.py migrate
+
+
+# UBUNTU INSTRUCTIONS =========================================================
+
 # If you have not followed the following instructions before, do the following: Go to your AssessmentAPI folder, and run all of the following commands in order:
 
 rm db.sqlite3
@@ -7,11 +32,11 @@ sudo apt-get update
 sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
 sudo su - postgres
 psql
-CREATE DATABASE jlcassessment;
-CREATE USER jlcassessmentuser WITH PASSWORD 'jacobsladder';
+CREATE ROLE jlcassessmentuser WITH PASSWORD 'jacobsladder';
 ALTER ROLE jlcassessmentuser SET client_encoding TO 'utf8';
 ALTER ROLE jlcassessmentuser SET default_transaction_isolation TO 'read committed';
 ALTER ROLE jlcassessmentuser SET timezone TO 'UTC';
+CREATE DATABASE jlcassessment;
 GRANT ALL PRIVILEGES ON DATABASE jlcassessment TO jlcassessmentuser;
 \q
 exit
