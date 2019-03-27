@@ -42,6 +42,10 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = models.Student.objects.all()
     serializer_class = local_serializers.StudentSerializer
 
+class EvaluatorViewSet(viewsets.ModelViewSet):
+    queryset = models.Evaluator.objects.all()
+    serializer_class = local_serializers.EvaluatorSerializer
+
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluation.objects.all()
     serializer_class = local_serializers.EvaluationSerializer
