@@ -17,16 +17,16 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
-        fields = ('url', 'code', 'status', 'first_name', 'last_name', \
+        fields = ('url', 'code', 'status', 'firstName', 'lastName', \
                 'birthdate', 'gender')
 
 class EvaluatorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Evaluator
-        fields = ('url', 'first_name', 'last_name')
+        fields = ('url', 'firstName', 'lastName')
 
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Evaluation
-        fields = ('url', 'student_id', 'evaluator_id', 'created_at', 'edited_at')
+        fields = ('url', 'studentId', 'evaluatorId', 'createdAt', 'editedAt')
 

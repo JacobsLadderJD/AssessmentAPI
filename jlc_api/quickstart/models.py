@@ -23,8 +23,8 @@ class Student(models.Model):
             ('LD','Learning Delay'),
             ('PDD','Pervasive Developmental Disorder')])
     status = models.CharField(max_length=20)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
     birthdate = models.DateField()
     gender = models.CharField(max_length=1, choices=[
         ('M','Male'), ('F','Female')])
@@ -32,22 +32,22 @@ class Student(models.Model):
 
     # Name to be displayed in admin
     def __str__(self):
-        return str(self.first_name) + ' ' + str(self.last_name)
+        return str(self.firstName) + ' ' + str(self.lastName)
 
 
 class Evaluator(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
+    firstName = models.CharField(max_length=20)
+    lastName = models.CharField(max_length=20)
     # Currently stub - more to be added
 
     # Name to be displayed in admin
     def __str__(self):
-        return str(self.first_name) + ' ' + str(self.last_name)
+        return str(self.firstName) + ' ' + str(self.lastName)
 
 class Evaluation(models.Model):
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    evaluator_id = models.ForeignKey(Evaluator, on_delete=models.CASCADE)
-    created_at = models.DateField()
-    edited_at = models.DateField()
+    studentId = models.ForeignKey(Student, on_delete=models.CASCADE)
+    evaluatorId = models.ForeignKey(Evaluator, on_delete=models.CASCADE)
+    createdAt = models.DateField()
+    editedAt = models.DateField()
     # Currently stub - more to be added
 
