@@ -28,5 +28,8 @@ class EvaluatorSerializer(serializers.HyperlinkedModelSerializer):
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Evaluation
-        fields = ('url', 'studentId', 'evaluatorId', 'createdAt', 'editedAt')
+        fields = ('url', 'studentId', 'evaluatorId', 'createdAt', 'editedAt', \
+                'notesSection', 'reflexSection', 'auditorySection', \
+                'visualSection', 'manualSection', 'languageSection', \
+                'mobilitySection', 'sensorySection', 'sensitivitiesSection')
 

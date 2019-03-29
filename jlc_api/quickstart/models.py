@@ -1,8 +1,11 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from ..quickstart import json_defaults
 
 # From https://www.django-rest-framework.org/api-guide/authentication/
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -49,5 +52,24 @@ class Evaluation(models.Model):
     evaluatorId = models.ForeignKey(Evaluator, on_delete=models.CASCADE)
     createdAt = models.DateField()
     editedAt = models.DateField()
-    # Currently stub - more to be added
+    notesSection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.notes_blank)
+    reflexSection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.reflex_blank)
+    tactilitySection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.tactility_blank)
+    auditorySection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.auditory_blank)
+    visualSection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.visual_blank)
+    manualSection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.manual_blank)
+    languageSection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.language_blank)
+    mobilitySection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.mobility_blank)
+    sensorySection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.sensory_blank)
+    sensitivitiesSection = JSONField(encoder=DjangoJSONEncoder, \
+            default=json_defaults.sensitivities_blank)
 
