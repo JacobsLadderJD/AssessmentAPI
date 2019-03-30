@@ -524,7 +524,8 @@ def manual_blank():
         "twistCap": {
             "comment": "",
             "type": "NegativeChannelScore",
-            "value": None
+            "off":None,
+            "on": None
         },
         "stringingBeads": {
             "comment": "",
@@ -683,6 +684,7 @@ def mobility_blank():
         "forearmProp": {
             "comment": "",
             "type": "NegativeChannelScore",
+            "value": None
         },
         "bellyRotations": {
             "comment": "",
@@ -817,22 +819,27 @@ def mobility_blank():
         "walksArmsCross": {
             "comment": "",
             "type": "NegativeChannelScore",
+            "value": None
         },
         "initialSkip": {
             "comment": "",
             "type": "NegativeChannelScore",
+            "value": None
         },
         "crossSkip": {
             "comment": "",
             "type": "NegativeChannelScore",
+            "value": None
         },
         "jumpingJacks": {
             "comment": "",
             "type": "NegativeChannelScore",
+            "value": None
         },
         "fourPieceCross": {
             "comment": "",
             "type": "NegativeChannelScore",
+            "value": None
         }
     }
 
