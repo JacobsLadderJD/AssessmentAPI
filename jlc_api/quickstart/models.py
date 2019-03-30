@@ -73,3 +73,8 @@ class Evaluation(models.Model):
             default=json_defaults.sensory_blank)
     sensitivitiesSection = JSONField(encoder=DjangoJSONEncoder, \
             default=json_defaults.sensitivities_blank)
+    
+    # Name to be displayed in admin
+    def __str__(self):
+        return str(self.student.firstName) + ' ' + str(self.student.lastName) \
+                + ' ' + str(self.createdAt)
