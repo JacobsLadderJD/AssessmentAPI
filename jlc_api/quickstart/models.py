@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import JSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.signals import post_save
@@ -39,9 +40,9 @@ class Student(models.Model):
 
 
 class Evaluator(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     firstName = models.CharField(max_length=20)
     lastName = models.CharField(max_length=20)
-    # Currently stub - more to be added
 
     # Name to be displayed in admin
     def __str__(self):

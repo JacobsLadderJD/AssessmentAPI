@@ -3,27 +3,28 @@ from jlc_api.quickstart.models import Student, Evaluator, Evaluation
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('id', 'username', 'email', 'groups', 'evaluator')
+        depth = 1
 
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ('url', 'name')
+        fields = ('id', 'name')
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('url', 'code', 'status', 'firstName', 'lastName', \
+        fields = ('id', 'code', 'status', 'firstName', 'lastName', \
                 'birthdate', 'gender')
 
 class EvaluatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluator
-        fields = ('url', 'firstName', 'lastName')
+        fields = ('id', 'user', 'firstName', 'lastName')
+        depth = 1
 
 class EvaluationRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
