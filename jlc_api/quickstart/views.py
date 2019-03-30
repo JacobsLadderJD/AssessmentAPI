@@ -40,17 +40,17 @@ class AuthenticatedView(APIView):
         return Response(content)
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = models.Student.objects.all()
+    queryset = models.Student.objects.all().order_by('lastName', 'firstName')
     serializer_class = local_serializers.StudentSerializer
     permission_classes = [IsAuthenticated]
 
 class EvaluatorViewSet(viewsets.ModelViewSet):
-    queryset = models.Evaluator.objects.all()
+    queryset = models.Evaluator.objects.all().order_by('lastName', 'firstName')
     serializer_class = local_serializers.EvaluatorSerializer
     permission_classes = [IsAuthenticated]
 
 class EvaluationViewSet(viewsets.ModelViewSet):
-    queryset = models.Evaluation.objects.all()
+    queryset = models.Evaluation.objects.all().order_by('editedAt', 'createdAt')
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
