@@ -14,22 +14,25 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-class StudentSerializer(serializers.HyperlinkedModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ('url', 'code', 'status', 'firstName', 'lastName', \
                 'birthdate', 'gender')
 
-class EvaluatorSerializer(serializers.HyperlinkedModelSerializer):
+class EvaluatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluator
         fields = ('url', 'firstName', 'lastName')
 
-class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
+class EvaluationRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluation
-        fields = ('url', 'studentId', 'evaluatorId', 'createdAt', 'editedAt', \
-                'notesSection', 'reflexSection', 'auditorySection', \
-                'visualSection', 'manualSection', 'languageSection', \
-                'mobilitySection', 'sensorySection', 'sensitivitiesSection')
+        fields = '__all__'
+        depth = 1
 
+class EvaluationListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Evaluation
+        fields = ('id', 'studentId', 'evaluatorId', 'createdAt', 'editedAt')
+        depth = 1

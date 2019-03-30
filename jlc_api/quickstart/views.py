@@ -23,7 +23,6 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = local_serializers.UserSerializer
 
-
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
@@ -48,7 +47,12 @@ class EvaluatorViewSet(viewsets.ModelViewSet):
 
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluation.objects.all()
-    serializer_class = local_serializers.EvaluationSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return local_serializers.EvaluationListSerializer
+        else:
+            return local_serializers.EvaluationRetrieveSerializer
 
 # Returns students with the substring included their name
 def studentsWithName(request, substring):
