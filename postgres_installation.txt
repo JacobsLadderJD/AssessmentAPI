@@ -22,6 +22,8 @@ source yourpersonalenvpathhere/bin/activate
 pip install psycopg2
 python manage.py migrate
 
+# Whenever you need to run the server or do anything to the database, make sure you run
+brew services start postgresql 
 
 # UBUNTU INSTRUCTIONS =========================================================
 

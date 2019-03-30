@@ -1,0 +1,20 @@
+# Do this whenever you need to reset the database totally
+# Whenever you see a commit message with (DROP DATABASE), follow these instructions.
+
+# Mac instructions
+brew services start postgresql 
+psql postgres
+DROP DATABASE jlcassessment; CREATE DATABASE jlcassessment;
+GRANT ALL PRIVILEGES ON DATABASE jlcassessment TO jlcassessmentuser;
+\q
+brew services stop postgresql
+
+
+# Ubuntu instructions
+sudo su - postgres
+psql
+DROP DATABASE jlcassessment; CREATE DATABASE jlcassessment;
+GRANT ALL PRIVILEGES ON DATABASE jlcassessment TO jlcassessmentuser;
+\q
+exit
+
