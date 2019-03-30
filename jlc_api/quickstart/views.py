@@ -22,6 +22,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = local_serializers.UserSerializer
+    permission_classes = [IsAuthenticated]
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -29,6 +30,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = local_serializers.GroupSerializer
+    permission_classes = [IsAuthenticated]
 
 class AuthenticatedView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -40,13 +42,16 @@ class AuthenticatedView(APIView):
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = models.Student.objects.all()
     serializer_class = local_serializers.StudentSerializer
+    permission_classes = [IsAuthenticated]
 
 class EvaluatorViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluator.objects.all()
     serializer_class = local_serializers.EvaluatorSerializer
+    permission_classes = [IsAuthenticated]
 
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluation.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         if self.action == 'list':
