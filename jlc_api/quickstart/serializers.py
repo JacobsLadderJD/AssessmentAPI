@@ -45,5 +45,5 @@ class EvaluationRetrieveSerializer(serializers.ModelSerializer):
 class EvaluationListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluation
-        fields = ('id', 'studentId', 'evaluatorId', 'createdAt', 'editedAt')
+        fields = ('id', 'student', 'evaluator', 'createdAt', 'editedAt')
         depth = 1

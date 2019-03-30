@@ -49,8 +49,8 @@ class Evaluator(models.Model):
         return str(self.firstName) + ' ' + str(self.lastName)
 
 class Evaluation(models.Model):
-    studentId = models.ForeignKey(Student, on_delete=models.CASCADE)
-    evaluatorId = models.ForeignKey(Evaluator, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    evaluator = models.ForeignKey(Evaluator, on_delete=models.CASCADE)
     createdAt = models.DateField()
     editedAt = models.DateField()
     notesSection = JSONField(encoder=DjangoJSONEncoder, \
@@ -73,4 +73,3 @@ class Evaluation(models.Model):
             default=json_defaults.sensory_blank)
     sensitivitiesSection = JSONField(encoder=DjangoJSONEncoder, \
             default=json_defaults.sensitivities_blank)
-
