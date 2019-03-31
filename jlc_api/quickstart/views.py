@@ -21,8 +21,13 @@ class UserViewSet(viewsets.ModelViewSet):
     """
 
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = local_serializers.UserSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.action == 'create': 
+            return local_serializers.UserCreateSerializer
+        else:
+            return local_serializers.UserListSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -46,8 +51,13 @@ class StudentViewSet(viewsets.ModelViewSet):
 
 class EvaluatorViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluator.objects.all().order_by('lastName', 'firstName')
-    serializer_class = local_serializers.EvaluatorSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.action == 'create': 
+            return local_serializers.EvaluatorCreateSerializer
+        else:
+            return local_serializers.EvaluatorListSerializer
 
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = models.Evaluation.objects.all().order_by('editedAt', 'createdAt')

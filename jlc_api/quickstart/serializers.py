@@ -13,17 +13,29 @@ class EvaluatorNestedSerializer(serializers.ModelSerializer):
         model = Evaluator
         fields = ('id', 'firstName', 'lastName')
 
-class UserSerializer(serializers.ModelSerializer):
+class UserListSerializer(serializers.ModelSerializer):
     evaluator = EvaluatorNestedSerializer()
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'groups', 'evaluator')
 
-class EvaluatorSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
+    evaluator = serializers.PrimaryKeyRelatedField(queryset=Evaluator.objects.all())
+    class Meta:
+        model = User
+        fields = ('username','password','email','evaluator')
+
+class EvaluatorListSerializer(serializers.ModelSerializer):
     user = UserNestedSerializer()
     class Meta:
         model = Evaluator
         fields = ('id', 'firstName', 'lastName', 'user')
+
+class EvaluatorCreateSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    class Meta:
+        model = Evaluator
+        fields = ('firstName','lastName','user')
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
