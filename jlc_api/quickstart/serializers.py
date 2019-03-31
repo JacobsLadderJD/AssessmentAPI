@@ -66,7 +66,7 @@ class EvaluationCreateSerializer(serializers.ModelSerializer):
     evaluator = serializers.PrimaryKeyRelatedField(queryset=Evaluator.objects.all())
     class Meta:
         model = User
-        fields = ('student','evaluator')
+        fields = ('student','evaluator', 'id')
 
     def create(self, validated_data):
         today = datetime.date.today()
@@ -78,4 +78,3 @@ class EvaluationCreateSerializer(serializers.ModelSerializer):
         )
         evaluation.save()
         return evaluation
-
