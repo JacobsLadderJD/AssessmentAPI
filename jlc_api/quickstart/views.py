@@ -66,6 +66,8 @@ class EvaluationViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return local_serializers.EvaluationListSerializer
+        elif self.action == 'create':
+            return local_serializers.EvaluationCreateSerializer
         else:
             return local_serializers.EvaluationRetrieveSerializer
 

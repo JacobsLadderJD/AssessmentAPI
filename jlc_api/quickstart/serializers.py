@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
 from jlc_api.quickstart.models import Student, Evaluator, Evaluation
 from rest_framework import serializers
+import datetime
 
 
 class UserNestedSerializer(serializers.ModelSerializer):
@@ -59,3 +60,22 @@ class EvaluationListSerializer(serializers.ModelSerializer):
         model = Evaluation
         fields = ('id', 'student', 'evaluator', 'createdAt', 'editedAt')
         depth = 1
+
+class EvaluationCreateSerializer(serializers.ModelSerializer):
+    student = serializers.PrimaryKeyRelatedField(queryset=Student.objects.all())
+    evaluator = serializers.PrimaryKeyRelatedField(queryset=Evaluator.objects.all())
+    class Meta:
+        model = User
+        fields = ('student','evaluator')
+
+    def create(self, validated_data):
+        today = datetime.date.today()
+        evaluation = Evaluation(
+                student=validated_data['student'],
+                evaluator=validated_data['evaluator'],
+                createdAt=today,
+                editedAt=today
+        )
+        evaluation.save()
+        return evaluation
+
