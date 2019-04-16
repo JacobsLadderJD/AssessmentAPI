@@ -6,7 +6,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
-from ..quickstart import json_defaults
+from ..quickstart import evaluation_template
 
 # From https://www.django-rest-framework.org/api-guide/authentication/
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -54,25 +54,25 @@ class Evaluation(models.Model):
     createdAt = models.DateField()
     editedAt = models.DateField()
     notesSection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.notes_blank)
+            default=evaluation_template.notes_blank)
     reflexSection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.reflex_blank)
+            default=evaluation_template.reflex_blank)
     tactilitySection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.tactility_blank)
+            default=evaluation_template.tactility_blank)
     auditorySection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.auditory_blank)
+            default=evaluation_template.auditory_blank)
     visualSection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.visual_blank)
+            default=evaluation_template.visual_blank)
     manualSection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.manual_blank)
+            default=evaluation_template.manual_blank)
     languageSection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.language_blank)
+            default=evaluation_template.language_blank)
     mobilitySection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.mobility_blank)
+            default=evaluation_template.mobility_blank)
     sensorySection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.sensory_blank)
+            default=evaluation_template.sensory_blank)
     sensitivitiesSection = JSONField(encoder=DjangoJSONEncoder, \
-            default=json_defaults.sensitivities_blank)
+            default=evaluation_template.sensitivities_blank)
     
     # Name to be displayed in admin
     def __str__(self):
