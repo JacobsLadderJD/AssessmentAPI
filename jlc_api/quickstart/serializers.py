@@ -63,16 +63,15 @@ class EvaluationListSerializer(serializers.ModelSerializer):
 
 class EvaluationCreateSerializer(serializers.ModelSerializer):
     student = serializers.PrimaryKeyRelatedField(queryset=Student.objects.all())
-    evaluator = serializers.PrimaryKeyRelatedField(queryset=Evaluator.objects.all())
     class Meta:
         model = User
-        fields = ('student','evaluator', 'id')
+        fields = ('student', 'id')
 
     def create(self, validated_data):
         today = datetime.date.today()
         evaluation = Evaluation(
                 student=validated_data['student'],
-                evaluator=validated_data['evaluator'],
+                evaluator=self.context['request'].user.evaluator,
                 createdAt=today,
                 editedAt=today
         )
