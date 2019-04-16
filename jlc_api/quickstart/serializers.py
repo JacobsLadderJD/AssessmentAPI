@@ -71,9 +71,9 @@ class EvaluationCreateSerializer(serializers.ModelSerializer):
         today = datetime.date.today()
         evaluation = Evaluation(
                 student=validated_data['student'],
-                evaluator=self.context['request'].user.evaluator,
                 createdAt=today,
                 editedAt=today
         )
         evaluation.save()
+        evaluation.evaluator.set([self.context['request'].user.evaluator])
         return evaluation
