@@ -50,7 +50,7 @@ class Evaluator(models.Model):
 
 class Evaluation(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    evaluator = models.ManyToManyField(Evaluator)
+    evaluators = models.ManyToManyField(Evaluator)
     createdAt = models.DateField()
     editedAt = models.DateField()
     notesSection = JSONField(encoder=DjangoJSONEncoder, \

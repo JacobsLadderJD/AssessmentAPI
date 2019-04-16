@@ -58,7 +58,7 @@ class EvaluationRetrieveSerializer(serializers.ModelSerializer):
 class EvaluationListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluation
-        fields = ('id', 'student', 'evaluator', 'createdAt', 'editedAt')
+        fields = ('id', 'student', 'evaluators', 'createdAt', 'editedAt')
         depth = 1
 
 class EvaluationCreateSerializer(serializers.ModelSerializer):
@@ -77,18 +77,18 @@ class EvaluationCreateSerializer(serializers.ModelSerializer):
         evaluation.save()
 
         # Add the requesting user as an evaluator
-        evaluator = [self.context['request'].user.evaluator]
+        evaluators = [self.context['request'].user.evaluator]
 
         # Adds any additionally specified evaluators
         evaluator_ids = []
-        added = [evaluator[0].id]
-        if 'evaluator' in self.context['request'].data:
-            evaluator_ids = self.context['request'].data['evaluator']
+        added = [evaluators[0].id]
+        if 'evaluators' in self.context['request'].data:
+            evaluator_ids = self.context['request'].data['evaluators']
         for evaluator_id in evaluator_ids:
             if evaluator_id not in added: # Avoid duplication
-                evaluator.append(Evaluator.objects.get(pk=evaluator_id))
+                evaluators.append(Evaluator.objects.get(pk=evaluator_id))
                 added.append(evaluator_id)
 
-        evaluation.evaluator.set(evaluator)
+        evaluation.evaluators.set(evaluators)
 
         return evaluation
