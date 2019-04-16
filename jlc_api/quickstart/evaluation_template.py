@@ -1,8 +1,32 @@
+import copy
 import json
 
-# Default Notes Section
+# Functions to return deep copies for model instantiation
 def notes_blank():
-    return {    
+    return copy.deepcopy(default_eval["notes_default"])
+def reflex_blank():
+    return copy.deepcopy(default_eval["reflex_default"])
+def tactility_blank():
+    return copy.deepcopy(default_eval["tactility_default"])
+def auditory_blank():
+    return copy.deepcopy(default_eval["auditory_default"])
+def visual_blank():
+    return copy.deepcopy(default_eval["visual_default"])
+def manual_blank():
+    return copy.deepcopy(default_eval["manual_default"])
+def language_blank():
+    return copy.deepcopy(default_eval["language_default"])
+def mobility_blank():
+    return copy.deepcopy(default_eval["mobility_default"])
+def sensory_blank():
+    return copy.deepcopy(default_eval["sensory_default"])
+def sensitivities_blank():
+    return copy.deepcopy(default_eval["sensitivities_default"])
+
+# Defaults for a full evaluation
+default_eval = {
+    # Default Notes Section
+    "notes_default": {
         "family": {"type": "text", "value": ""},
         "history": {"type": "text", "value": ""},
         "goals": {"type": "text", "value": ""},
@@ -19,11 +43,10 @@ def notes_blank():
         "languageChannel": {"type": "text", "value": ""},
         "wholeBrainLang": {"type": "text", "value": ""},
         "mobilityChannel": {"type": "text", "value": ""}
-    }
+    },
 
-# Default Reflex Section
-def reflex_blank():
-    return {
+    # Default Reflex Section
+    "reflex_default": {
         "moro": {"comment": "", "type": "Integration", "upper": True, "lower": None},
         "spinalGalant": {"comment": "", "type": "Integration", "left": False, "right": True},
         "crossedExtensor": {"comment": "", "type": "Integration", "left": False, "right": True},
@@ -41,11 +64,10 @@ def reflex_blank():
         "symmetricalTonic": {"comment": "", "type": "Integration", "value": None},
         "tonicLabyrinthine": {"comment": "", "type": "Integration", "forward": None, "backward": None},
         "headRighting": {"comment": "", "type": "Integration", "sideToSide": None, "frontToBack": None}
-    }
+    },
 
-# Default Tactility Section
-def tactility_blank():
-    return {
+    # Default Tactility Section
+    "tactility_default": {
         "deepPressure": {"comment": "", "type": "ChannelScore", "value": None},
         "tonicity": {"comment": "", "type": "ChannelScore", "face": None, "neck": None, "trunk": None, "shoulderRight": None, "shoulderLeft": None, "armRight": None, "armLeft": None, "handRight": None, "handLeft": None, "hipRight": None, "hipLeft": None, "legRight": None, "legLeft": None, "footRight": None, "footLeft": None},
         "deepPainReaction": {"comment": "", "type": "ChannelScore", "value": None},
@@ -62,11 +84,10 @@ def tactility_blank():
         "mannsLeftFoot": {"comment": "", "type": "NegativeChannelScore", "eyesOpen": None, "eyesClosed": None},
         "armMatching": {"comment": "", "type": "NegativeChannelScore", "front": None, "above": None, "sides": None},
         "graphesthesia": {"comment": "", "type": "NegativeChannelScore", "right": None, "left": None}
-    }
+    },
 
-# Default Auditory Section
-def auditory_blank():
-    return {
+    # Default Auditory Section
+    "auditory_default": {
         "vestibularFunction": {"comment": "", "type": "ChannelScore", "right": None, "left": None},
         "threateningSound": {"comment": "", "type": "ChannelScore", "value": None},
         "soundSensitivity": {"comment": "", "type": "ChannelScore", "value": None},
@@ -77,11 +98,10 @@ def auditory_blank():
         "twoStepDirections": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "sentenceUnderstanding": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "auditoryProcessingSpeed": {"comment": "", "type": "NegativeChannelScore", "line1": None, "line2": None, "line3": None, "line4": None}
-    }
+    },
 
-# Default Visual Section
-def visual_blank():
-    return {
+    # Default Visual Section
+    "visual_default": {
         "trackingHorizontal": {"comment": "", "type": "ChannelScore", "value": None},
         "trackingVertical": {"comment": "", "type": "ChannelScore", "value": None},
         "convergence": {"comment": "", "type": "ChannelScore", "value": None},
@@ -100,11 +120,10 @@ def visual_blank():
         "lowercaseLetters": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
         "initialSightWords": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
         "visualProcessingSpeed": {"comment": "", "type": "NegativeChannelScore", "value": None}
-    }
+    },
 
-# Default Manual Section
-def manual_blank():
-    return {
+    # Default Manual Section
+    "manual_default": {
         "objectRelease": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "objectGrasp": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "handsToMidline": {"comment": "", "type": "NegativeChannelScore", "value": None},
@@ -124,11 +143,10 @@ def manual_blank():
         "name": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "letters": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "dictatedSentence": {"comment": "", "type": "NegativeChannelScore", "value": None}
-    }
+    },
 
-# Default Language Section
-def language_blank():
-    return {
+    # Default Language Section
+    "language_default": {
         "soundVerbalResponse": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "lipUtilization": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "oralMotorMovement": {"comment": "", "type": "NegativeChannelScore", "value": None},
@@ -149,11 +167,10 @@ def language_blank():
         "sentencesResponse": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "conversationExchange": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "opposites": {"comment": "", "type": "NegativeChannelScore", "value": None}
-    }
+    },
 
-# Default Mobility Section
-def mobility_blank():
-    return {
+    # Default Mobility Section
+    "mobility_default": {
         "forearmProp": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "bellyRotations": {"comment": "", "type": "NegativeChannelScore", "right": None, "left": None},
         "bellyCrawl": {"comment": "", "type": "NegativeChannelScore", "value": None},
@@ -185,11 +202,10 @@ def mobility_blank():
         "crossSkip": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "jumpingJacks": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "fourPieceCross": {"comment": "", "type": "NegativeChannelScore", "value": None}
-    }
+    },
 
-# Default Sensory Section
-def sensory_blank():
-    return {
+    # Default Sensory Section
+    "sensory_default": {
         "hands": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "feet": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "trunk": {"comment": "", "type": "PositiveChannelScore", "value": None},
@@ -213,11 +229,10 @@ def sensory_blank():
         "spinningObjects": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "holdStraightObject": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "shadows": {"comment": "", "type": "PositiveChannelScore", "value": None}
-    }
+    },
 
-# Default Sensitivities Section
-def sensitivities_blank():
-    return {
+    # Default Sensitivities Section
+    "sensitivities_default": {
         "haircuts": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "washingFace": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "washingHair": {"comment": "", "type": "PositiveChannelScore", "value": None},
@@ -230,3 +245,4 @@ def sensitivities_blank():
         "shoes": {"comment": "", "type": "PositiveChannelScore", "value": None},
         "coat": {"comment": "", "type": "PositiveChannelScore", "value": None}
     }
+}
