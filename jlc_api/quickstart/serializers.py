@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
 from jlc_api.quickstart.models import Student, Evaluator, Evaluation
+from jlc_api.quickstart import evaluation_template
 from rest_framework import serializers
 import datetime
 
@@ -48,6 +49,43 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ('id', 'code', 'status', 'firstName', 'lastName', \
                 'birthdate', 'gender')
+
+class EvaluationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Evaluation
+        fields = '__all__'
+
+    # Validators called for each field on Update or Partial_Update
+    def validate_notesSection(self, value):
+        evaluation_template.section_is_valid('notes', value)
+        return value
+    def validate_reflexSection(self, value):
+        evaluation_template.section_is_valid('reflex', value)
+        return value
+    def validate_tactilitySection(self, value):
+        evaluation_template.section_is_valid('tactility', value)
+        return value
+    def validate_auditorySection(self, value):
+        evaluation_template.section_is_valid('auditory', value)
+        return value
+    def validate_visualSection(self, value):
+        evaluation_template.section_is_valid('visual', value)
+        return value
+    def validate_manualSection(self, value):
+        evaluation_template.section_is_valid('manual', value)
+        return value
+    def validate_languageSection(self, value):
+        evaluation_template.section_is_valid('language', value)
+        return value
+    def validate_mobilitySection(self, value):
+        evaluation_template.section_is_valid('mobility', value)
+        return value
+    def validate_sensorySection(self, value):
+        evaluation_template.section_is_valid('sensory', value)
+        return value
+    def validate_sensitivitiesSection(self, value):
+        evaluation_template.section_is_valid('sensitivities', value)
+        return value
 
 class EvaluationRetrieveSerializer(serializers.ModelSerializer):
     class Meta:

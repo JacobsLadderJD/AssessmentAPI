@@ -1,5 +1,25 @@
+from rest_framework import serializers
 import copy
 import json
+
+# Validate an evaluation update request for a section
+def section_is_valid(section, data):
+    result = structure_is_valid(data, default_eval[section + '_default'])
+    if not result[0]:
+        raise serializers.ValidationError(result[1])
+
+# Ensure individual section has correct structure
+def structure_is_valid(in_section, valid_section):
+    if type(in_section) is not dict:
+        return (False, 'Not an object')  # section is not a json object
+    if in_section.keys() != valid_section.keys():
+        return (False, 'Invalid subsection names')
+    for key in in_section:
+        if type(in_section[key]) is not dict:
+            return (False, 'Non-object subsection: ' + str(key))
+        if in_section[key].keys() != valid_section[key].keys():
+            return (False, 'Invalid fields in subsection ' + str(key))
+    return (True,)
 
 # Functions to return deep copies for model instantiation
 def notes_blank():

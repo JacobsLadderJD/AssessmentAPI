@@ -68,8 +68,10 @@ class EvaluationViewSet(viewsets.ModelViewSet):
             return local_serializers.EvaluationListSerializer
         elif self.action == 'create':
             return local_serializers.EvaluationCreateSerializer
-        else:
+        elif self.action == 'retrieve':
             return local_serializers.EvaluationRetrieveSerializer
+        else:
+            return local_serializers.EvaluationSerializer
 
 # Returns students with the substring included their name
 def studentsWithName(request, substring):
