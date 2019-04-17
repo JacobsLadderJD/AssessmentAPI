@@ -57,34 +57,34 @@ class EvaluationSerializer(serializers.ModelSerializer):
 
     # Validators called for each field on Update or Partial_Update
     def validate_notesSection(self, value):
-        evaluation_template.section_is_valid('notes', value)
+        evaluation_template.validate_section('notes', value)
         return value
     def validate_reflexSection(self, value):
-        evaluation_template.section_is_valid('reflex', value)
+        evaluation_template.validate_section('reflex', value)
         return value
     def validate_tactilitySection(self, value):
-        evaluation_template.section_is_valid('tactility', value)
+        evaluation_template.validate_section('tactility', value)
         return value
     def validate_auditorySection(self, value):
-        evaluation_template.section_is_valid('auditory', value)
+        evaluation_template.validate_section('auditory', value)
         return value
     def validate_visualSection(self, value):
-        evaluation_template.section_is_valid('visual', value)
+        evaluation_template.validate_section('visual', value)
         return value
     def validate_manualSection(self, value):
-        evaluation_template.section_is_valid('manual', value)
+        evaluation_template.validate_section('manual', value)
         return value
     def validate_languageSection(self, value):
-        evaluation_template.section_is_valid('language', value)
+        evaluation_template.validate_section('language', value)
         return value
     def validate_mobilitySection(self, value):
-        evaluation_template.section_is_valid('mobility', value)
+        evaluation_template.validate_section('mobility', value)
         return value
     def validate_sensorySection(self, value):
-        evaluation_template.section_is_valid('sensory', value)
+        evaluation_template.validate_section('sensory', value)
         return value
     def validate_sensitivitiesSection(self, value):
-        evaluation_template.section_is_valid('sensitivities', value)
+        evaluation_template.validate_section('sensitivities', value)
         return value
 
 class EvaluationRetrieveSerializer(serializers.ModelSerializer):

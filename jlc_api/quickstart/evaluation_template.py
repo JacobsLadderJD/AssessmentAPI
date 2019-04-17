@@ -3,16 +3,16 @@ import copy
 import json
 
 # Validate an evaluation update request for a section
-def section_is_valid(section, data):
-    result = structure_is_valid(data, default_eval[section + '_default'])
+def validate_section(section, data):
+    result = validate_structure(data, default_eval[section + '_default'])
     if not result[0]:
         raise serializers.ValidationError(result[1])
-    result = fields_are_valid(data, default_eval[section + '_default'])
+    result = validate_fields(data, default_eval[section + '_default'])
     if not result[0]:
         raise serializers.ValidationError(result[1])
 
 # Ensure individual section has correct structure
-def structure_is_valid(in_section, valid_section):
+def validate_structure(in_section, valid_section):
     if type(in_section) is not dict:
         return (False, 'Not an object')  # section is not a json object
     if in_section.keys() != valid_section.keys():
@@ -25,7 +25,7 @@ def structure_is_valid(in_section, valid_section):
     return (True,)
 
 # Ensure structurally sound section follows field validation
-def fields_are_valid(in_section, valid_section):
+def validate_fields(in_section, valid_section):
 
     for key in in_section:
         if type(in_section[key]['type']) is not str \
