@@ -7,6 +7,9 @@ def section_is_valid(section, data):
     result = structure_is_valid(data, default_eval[section + '_default'])
     if not result[0]:
         raise serializers.ValidationError(result[1])
+    result = fields_are_valid(data, default_eval[section + '_default'])
+    if not result[0]:
+        raise serializers.ValidationError(result[1])
 
 # Ensure individual section has correct structure
 def structure_is_valid(in_section, valid_section):
@@ -19,6 +22,56 @@ def structure_is_valid(in_section, valid_section):
             return (False, 'Non-object subsection: ' + str(key))
         if in_section[key].keys() != valid_section[key].keys():
             return (False, 'Invalid fields in subsection ' + str(key))
+    return (True,)
+
+# Ensure structurally sound section follows field validation
+def fields_are_valid(in_section, valid_section):
+
+    for key in in_section:
+        if type(in_section[key]['type']) is not str \
+                or in_section[key]['type'] != valid_section[key]['type']:
+            return (False, 'Invalid validation type in subsection ' + str(key))
+        if 'comment' in in_section[key] \
+                and type(in_section[key]['comment']) is not str:
+            return (False, 'Non-string comment in subsection ' + str(key))
+
+        # Validate all fields but 'type' and 'comment'
+        validation_type = valid_section[key]['type']
+        fields = [field for field in in_section[key] if field not in ['type','comment']]
+        for field in fields:
+            data = in_section[key][field]
+
+            # Handle individual validation rules for type
+            valid = True
+            if validation_type == 'text':
+                valid = type(data) is str
+            elif validation_type == 'Integration':
+                valid = (data is None) or \
+                        ((data is True) or (data is False))
+            elif validation_type == 'ChannelScore':
+                valid = (data is None) or \
+                        ((type(data) is int) and (data >= -3) and (data <= 3))
+            elif validation_type == 'NegativeChannelScore':
+                valid = (data is None) or \
+                        ((type(data) is int) and (data >= -3) and (data <= 0))
+            elif validation_type == 'PositiveChannelScore':
+                valid = (data is None) or \
+                        ((type(data) is int) and (data >= 0) and (data <= 3))
+            elif validation_type == 'OptionNegativeChannelScore':
+                # This one is a weird exception to the rule that all
+                # fields but 'comment' and 'type' are validated the same
+                if field == 'f02' or field == 'f03' or field == 'verbal':
+                    # Validated as Integration, with no null value
+                    valid = (data is True) or (data is False)
+                else:
+                    # Validated as NegativeChannelScore
+                    valid = (data is None) or \
+                            ((type(data) is int) and (data >= -3) and (data <= 0))
+            
+            # Report failed validation
+            if valid is False:
+                return (False, 'Validation failed for ' + str(field) + ' in ' + str(key))
+
     return (True,)
 
 # Functions to return deep copies for model instantiation
@@ -133,12 +186,12 @@ default_eval = {
         "initialMatchColors": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "initialMatchShapes": {"comment": "", "type": "NegativeChannelScore", "value": None},
         "initialMatchPic": {"comment": "", "type": "NegativeChannelScore", "value": None},
-        "colors": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
-        "shapes": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
-        "numbers": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
-        "uppercaseLetters": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
-        "lowercaseLetters": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
-        "initialSightWords": {"comment": "", "type": "NegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
+        "colors": {"comment": "", "type": "OptionNegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
+        "shapes": {"comment": "", "type": "OptionNegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
+        "numbers": {"comment": "", "type": "OptionNegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
+        "uppercaseLetters": {"comment": "", "type": "OptionNegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
+        "lowercaseLetters": {"comment": "", "type": "OptionNegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
+        "initialSightWords": {"comment": "", "type": "OptionNegativeChannelScore", "value": None, "f02": False, "f03": False, "verbal": False},
         "visualProcessingSpeed": {"comment": "", "type": "NegativeChannelScore", "value": None}
     },
 
