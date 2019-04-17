@@ -120,11 +120,15 @@ class EvaluationCreateSerializer(serializers.ModelSerializer):
         # Adds any additionally specified evaluators
         evaluator_ids = []
         added = [evaluators[0].id]
-        if 'evaluators' in self.context['request'].data:
+        if 'evaluators' in self.context['request'].data \
+                and type(self.context['request'].data['evaluators']) is list:
             evaluator_ids = self.context['request'].data['evaluators']
         for evaluator_id in evaluator_ids:
             if evaluator_id not in added: # Avoid duplication
-                evaluators.append(Evaluator.objects.get(pk=evaluator_id))
+                try:
+                    evaluators.append(Evaluator.objects.get(pk=evaluator_id))
+                except:  # Most likely, because that evaluator does not exist
+                    pass
                 added.append(evaluator_id)
 
         evaluation.evaluators.set(evaluators)
