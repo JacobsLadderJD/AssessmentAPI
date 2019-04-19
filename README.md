@@ -13,22 +13,45 @@ The front-end code for the tool can be found here: [AssessmentTool](https://gith
 - **psycopg2 [v2.7.7]:** A library adapting PostgreSQL database commands to Python ([docs](http://initd.org/psycopg/))
 
 ## Project installation
-These installation instructions are designed with UNIX-based systems in mind. Both Mac and Ubuntu will be covered here. Windows installation may vary, but links to external tutorials will be provided where appropriate.
+These installation instructions are designed with UNIX-based systems in mind. Both Mac and Ubuntu will be covered here. Windows installation may vary, but links to external tutorials are provided where appropriate.
 
 ### Installing Python and related tools
-#### 1. Step 1 Name
-Step 1 description.
+#### 1. Install Python 3
+Go to https://www.python.org/downloads/ and download the latest version of Python 3.
 
-#### 2. Step 2 Name
-Description with code example
+Follow the installer instructions. These should be relatively straightforward, and there are many resources available online.
+
+After completing the install, verify it worked by opening a terminal window and typing:
 ```
-$ example terminal things here
+$ python --version
 ```
-Terminal output expectation here.
+This should report which version of Python you installed.
+
+**Note:** On some computers, you may need to type `python3` instead of `python`. If this is the case, continue to use `python3` until the virtual environment is loaded (in a later step).
+
+#### 2. Create a virtual environment
+Go to the folder that holds the AssessmentAPI project (where you find `manage.py`) in a terminal window, then type the following:
+```
+$ python -m venv ./env
+```
+This should create a folder here called "env", and along with it installed Python and pip in that environment. Activate the virtual environment at any type by opening a terminal and typing:
+```
+$ source env/bin/activate
+```
+You can also exit the virtual evironment at any time by closing the terminal window, or typing:
+```
+$ deactivate
+```
+You will need to have the virtual environment activated throughout the following steps, and whenever you want to run or manage the server.
+
+**Note:** Even if you previously had to type `python3` instead of `python`, whenever the virtual environment has been activated, you can just type `python`.
 
 #### Troubleshooting
-Based on experience, a few things may cause problems when attempting to install or run the application. These issues are enumerated below.
-##### 1. Issue 1 title
+Based on experience, you may encounter the following problems when attempting to follow the above instructions.
+##### 1. Python is not recognized after the install
+Try typing `python3` instead of `python`. If this is the case, continue to use `python3` until you are in a virtual environment.
+##### 2. 'No such file or directory' when trying to activate the virtual environment
+The second part of the activation command is the path to the `activate` file. Find this file in a file explorer, and ensure you are giving `source` the correct path.
 
 ### Installing Django and its libraries
 #### 1. Step 1 Name
