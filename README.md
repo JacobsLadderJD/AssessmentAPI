@@ -52,19 +52,25 @@ Try typing `python3` instead of `python`. If this is the case, continue to use `
 The second part of the activation command is the path to the `activate` file. Find this file in a file explorer, and ensure you are giving `source` the correct path.
 
 ### Installing Django and its libraries
-#### 1. Step 1 Name
-Step 1 description.
-
-#### 2. Step 2 Name
-Description with code example
+#### 1. Activate the virtual environment
+If the virtual environment is not already activated, go to the folder that holds the AssessmentAPI project (where you find `manage.py`) in a terminal window, then type the following:
 ```
-$ example terminal things here
+$ source env/bin/activate
 ```
-Terminal output expectation here.
+If you have any issues with this, see the above "Create a virtual environment".
 
-#### Troubleshooting
-Based on experience, a few things may cause problems when attempting to install or run the application. These issues are enumerated below.
-##### 1. Issue 1 title
+#### 2. Install Django
+Type the following commands in order, each after the previous finishes sucessfully:
+```
+$ pip install django
+```
+```
+$ pip install django-cors-headers
+```
+```
+$ pip install djangorestframework
+```
+You should see each of the Django components being installed in the virtual environment.
 
 ### Setting up the database
 #### 1. Step 1 Name
