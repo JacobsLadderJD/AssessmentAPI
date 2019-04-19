@@ -6,7 +6,11 @@ The front-end code for the tool can be found here: [AssessmentTool](https://gith
 ## Release notes
 
 ## Libraries to know about
-- **Django [v2.2]:** Description ([docs](https://djangoproject.com))
+- **pip [v9.0.1]:** A Python package installer ([docs](https://pypi.org/project/pip/))
+- **Django [v2.1.7]:** A Python-based web framework ([docs](https://djangoproject.com))
+- **Django Rest Framework [v3.9.1]:** A Django framework used for creating REST APIs ([docs](https://www.django-rest-framework.org/))
+- **django-cors-headers [v2.4.0]:** A Django App that assists in use of Cross Origin Resource Sharing headers ([docs](https://pypi.org/project/django-cors-headers/))
+- **psycopg2 [v2.7.7]:** A library adapting PostgreSQL database commands to Python ([docs](http://initd.org/psycopg/))
 
 ## Project installation
 These installation instructions are designed with UNIX-based systems in mind. Both Mac and Ubuntu will be covered here. Windows installation may vary, but links to external tutorials will be provided where appropriate.
