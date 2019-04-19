@@ -15,7 +15,7 @@ The front-end code for the tool can be found here: [AssessmentTool](https://gith
 ## Project installation
 These installation instructions are designed with UNIX-based systems in mind. Both Mac and Ubuntu will be covered here. Windows installation may vary, but links to external tutorials will be provided where appropriate.
 
-### Installing Django
+### Installing Python and related tools
 #### 1. Step 1 Name
 Step 1 description.
 
@@ -26,6 +26,45 @@ $ example terminal things here
 ```
 Terminal output expectation here.
 
-### Troubleshooting
+#### Troubleshooting
 Based on experience, a few things may cause problems when attempting to install or run the application. These issues are enumerated below.
-#### 1. Issue 1 title
+##### 1. Issue 1 title
+
+### Installing Django and its libraries
+#### 1. Step 1 Name
+Step 1 description.
+
+#### 2. Step 2 Name
+Description with code example
+```
+$ example terminal things here
+```
+Terminal output expectation here.
+
+#### Troubleshooting
+Based on experience, a few things may cause problems when attempting to install or run the application. These issues are enumerated below.
+##### 1. Issue 1 title
+
+### Setting up the database
+#### 1. Step 1 Name
+Step 1 description.
+
+#### 2. Step 2 Name
+Description with code example
+```
+$ example terminal things here
+```
+Terminal output expectation here.
+
+#### Troubleshooting
+Based on experience, a few things may cause problems when attempting to install or run the application. These issues are enumerated below.
+##### 1. Issue 1 title
+
+## Running the Server
+After the installation instructions have been followed, the server can be run locally at any time by following these instructions.
+
+Description with code example
+```
+$ example terminal things here
+```
+Terminal output expectation here.
