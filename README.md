@@ -25,9 +25,7 @@ After completing the install, verify it worked by opening a terminal window and 
 ```
 $ python --version
 ```
-This should report which version of Python you installed.
-
-**Note:** On some computers, you may need to type `python3` instead of `python`. If this is the case, continue to use `python3` until the virtual environment is loaded (in a later step).
+This should report which version of Python you installed. If this does not work, or it says it is version 2, you may need to type `python3` instead of `python`. If this is the case, continue to use `python3` until the virtual environment is loaded (in a later step).
 
 #### 2. Create a virtual environment
 Go to the folder that holds the AssessmentAPI project (where you find `manage.py`) in a terminal window, then type the following:
