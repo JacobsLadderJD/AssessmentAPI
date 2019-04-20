@@ -2,8 +2,37 @@
 A Django Rest Framework based back-end of the new electronic student assessment system at [Jacob's Ladder Center](https://www.jacobsladdercenter.com/) in Roswell, GA.
 
 The front-end code for the tool can be found here: [AssessmentTool](https://github.com/JacobsLadderJD/AssessmentTool).
+### Team Members
+- Jack Abrams
+- Adam Hayward
+- Kyra LeRoux
+- Joshua Redding
+- Noah Waldron
 
 ## Release notes
+### Version 1.0.0 (4/19/2019)
+#### New Features
+- Admin panel for manually editing all objects in the database
+- API endpoints to create, list, retrieve, update, and delete students
+- API endpoints to create, list, retrieve, update, and delete evalutions
+- Relationships between Evaluation, Student, Evaluator, and User objects to prevent data duplication
+- Nested serializers for evaluations to remove the need for multiple requests
+- Simplified serializers when requesting a list of many evaluations
+- Support for multiple evaluators for a single evaluation
+- Internal validation to ensure updates to evaluations follow correct formats
+- CSV serialization for evaluation results
+
+#### Bug Fixes
+- Evaluation serializers no longer only show ids for related objects
+- Update requests to Evaluations no longer cause Python errors when structure isn't followed
+- Nested serializers no longer nest recursively
+- Create requests for evaluations no longer require unnecessary input fields to be filled
+- Create requests for evaluations no longer allow input discrepancies to add multiple of the same evaluator
+- Admin panel objects no longer show unreadable system names
+
+#### Known Issues
+- Authentication is broken on the root (non-admin) url's front end
+- Possible to create an evaluator with no related User from the Evaluator section of the admin panel
 
 ## Libraries to know about
 - **pip [v9.0.1]:** A Python package installer ([docs](https://pypi.org/project/pip/))
