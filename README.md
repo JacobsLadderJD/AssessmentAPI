@@ -73,19 +73,118 @@ $ pip install djangorestframework
 You should see each of the Django components being installed in the virtual environment.
 
 ### Setting up the database
-#### 1. Step 1 Name
-Step 1 description.
+This part differs greatly between systems running OSX and systems running Linux. The instructions have been divided to reflect this.
+#### Mac (OSX) instructions
+##### 1. Install Homebrew
+If you do not already have Homebrew installed, go to https://brew.sh/ and follow the Install Homebrew instructions there.
 
-#### 2. Step 2 Name
-Description with code example
+##### 2. Install PostgreSQL
+Open a terminal window and run the following command:
 ```
-$ example terminal things here
+$ brew install postgresql
 ```
-Terminal output expectation here.
+Follow the instructions to complete the installation.
 
-#### Troubleshooting
-Based on experience, a few things may cause problems when attempting to install or run the application. These issues are enumerated below.
-##### 1. Issue 1 title
+##### 3. Run the postgresql service
+Every time you work with the server or the database on an OSX system, run the following command first:
+```
+$ brew services start postgresql
+```
+You can stop it at any time by replacing `start` with `stop`, but make sure you start it again before working with the server or the database.
+
+After it is running, run the follwing command:
+```
+$ psql postgres
+```
+
+#### 4. Create the database
+Run the following commands in order:
+```
+$ CREATE USER jlcassessmentuser WITH PASSWORD 'jacobsladder';
+$ ALTER ROLE jlcassessmentuser SET client_encoding TO 'utf8';
+$ ALTER ROLE jlcassessmentuser SET default_transaction_isolation TO 'read committed';
+$ ALTER ROLE jlcassessmentuser SET timezone TO 'UTC';
+$ CREATE DATABASE jlcassessment;
+$ GRANT ALL PRIVILEGES ON DATABASE jlcassessment TO jlcassessmentuser;
+$ \q
+```
+This should have created the new database.
+
+#### 5. Install psycopg2
+Ensure the virtual environment is activated, then run the following:
+```
+$ pip install psycopg2
+```
+
+#### 6. Migrate the database
+Finally, we have to get the new database ready to run the Assessment API. Make sure your terminal window is in the same folder as `manage.py` and a virtual environment is activated, then run the following:
+```
+$ python manage.py migrate
+```
+This should give you feedback showing that the database has been successfully migrated. You can now continue to the instructions for running the server for the first time.
+
+##### Troubleshooting
+Based on experience, you may encounter the following problems when attempting to follow the above instructions.
+###### 1. psql: could not connect to server: No such file or directory
+Go to your computer's settings and remove the Postgres user. Then run the following commands:
+```
+$ brew services stop postgresql
+$ brew install postgresql
+```
+After this, remove any remnants of the PostgreSQL installation on your system, then start the installation instructions from the beginning.
+
+#### Linux instructions
+##### 1. Install Postgres
+Go to https://www.postgresql.org/download/ and select the installation instructions for your variety of Linux. Follow them exactly. If you are having issues getting it to properly install, search online for specific walkthroughs for your Linux version.
+
+##### 2. Running the postgres utility
+In a terminal window, run the following:
+```
+$ sudo su - postgres
+```
+This will ask for your password, then run the terminal as the special postgres user. Run the PostgreSQL utility by typing:
+```
+$ psql
+```
+
+#### 3. Create the database
+Run the following commands in order:
+```
+$ CREATE USER jlcassessmentuser WITH PASSWORD 'jacobsladder';
+$ ALTER ROLE jlcassessmentuser SET client_encoding TO 'utf8';
+$ ALTER ROLE jlcassessmentuser SET default_transaction_isolation TO 'read committed';
+$ ALTER ROLE jlcassessmentuser SET timezone TO 'UTC';
+$ CREATE DATABASE jlcassessment;
+$ GRANT ALL PRIVILEGES ON DATABASE jlcassessment TO jlcassessmentuser;
+$ \q
+```
+This should have created the new database. You can now exit the special postgres user terminal by typing:
+```
+$ exit
+```
+
+#### 4. Install psycopg2
+Ensure the virtual environment is activated, then run the following:
+```
+$ pip install psycopg2
+```
+
+#### 5. Migrate the database
+Finally, we have to get the new database ready to run the Assessment API. Make sure your terminal window is in the same folder as `manage.py` and a virtual environment is activated, then run the following:
+```
+$ python manage.py migrate
+```
+This should give you feedback showing that the database has been successfully migrated. You can now continue to the instructions for running the server for the first time.
+
+##### Troubleshooting
+Based on experience, you may encounter the following problems when attempting to follow the above instructions.
+###### 1. Ubuntu installation is not working by the instructions on the PostgreSQL website
+Try running the following commmands:
+```
+$ sudo apt-get remove postgresql postgresql-contrib
+$ sudo apt-get update
+$ sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+```
 
 ## Running the Server
 After the installation instructions have been followed, the server can be run locally at any time by following these instructions.
