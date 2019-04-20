@@ -187,10 +187,27 @@ $ sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-con
 ```
 
 ## Running the Server
-After the installation instructions have been followed, the server can be run locally at any time by following these instructions.
+After the installation instructions have been followed, the server can be run to support the front-end AssessmentTool.
 
-Description with code example
+
+### First time setup
+If the server has not been run before, after all the setup described above has been completed, there are a few things that need to be done.
+#### 1. Create the admin user
+The server has to have an administrator-level user. Their username needs to be a **valid email** for other parts of the server to function. Activate the virtual environment, then run the following command:
 ```
-$ example terminal things here
+$ python manage.py createsuperuser
 ```
-Terminal output expectation here.
+When asked for the username, make sure it is a valid email. The actual email field can be left blank.
+#### 2. Run the server
+Run the following command:
+```
+$ python manage.py runserver
+```
+This command takes over the terminal, and stays active as long as the server is running. The server can be stopped at any time by pressing `Ctrl+C` on the keyboard.
+#### 3. Finish admin user setup
+Open a web browser and navigate to <localhost:8000/admin>. Log in with the username and password you created in the first step.
+
+When the admin panel comes up, select "Users" and then the user you created. Scoll to the bottom, and where you see fields for "firstName" and "lastName", fill them out, then hit Save.
+
+### Running the Server other times
+After the initial setup has been completed, the server can be run at any time by opening a terminal window, navigating to the folder with `manage.py`, activating the virtual environment, the running `python manage.py runserver`. It can then be stopped at any time by pressing `Ctrl+C` on the keyboard.
