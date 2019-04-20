@@ -129,7 +129,7 @@ Based on experience, you may encounter the following problems when attempting to
 Go to your computer's settings and remove the Postgres user. Then run the following commands:
 ```
 $ brew services stop postgresql
-$ brew install postgresql
+$ brew uninstall postgresql
 ```
 After this, remove any remnants of the PostgreSQL installation on your system, then start the installation instructions from the beginning.
 
