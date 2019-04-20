@@ -211,3 +211,28 @@ When the admin panel comes up, select "Users" and then the user you created. Sco
 
 ### Running the Server other times
 After the initial setup has been completed, the server can be run at any time by opening a terminal window, navigating to the folder with `manage.py`, activating the virtual environment, the running `python manage.py runserver`. It can then be stopped at any time by pressing `Ctrl+C` on the keyboard.
+
+## Common Server Tasks
+Occasionally, something needs to be done with the API that cannot be done from the front-end. These things are listed below.
+
+### Creating a new user
+Run the server, then open a web browser and navigate to <localhost:8000/admin>. After logging in, select Users, then in the top-right, hit "Add User". Make sure to fill out all fields, then hit "Save".
+
+This new user is not an administrator user, and thus cannot log into the admin panel on the back-end, but can use the front-end AssessmentTool just as well as any user.
+
+### Editing an existing user's data
+Run the server, then open a web browser and navigate to <localhost:8000/admin>. After logging in, select Users, then select the user you want to edit. Make the changes, then hit "Save".
+
+### Deleting a user
+Run the server, then open a web browser and navigate to <localhost:8000/admin>. After logging in, select Users, then hit the checkbox next to the users you want to delete. Find the dropdown at the top of the list titled "Actions", select "Delete selected users", then hit "Go". If this user has had any evaluations attributed to them, these must also be deleted, so the admin panel will ask you to confirm this. If you do not want to delete those evaluations, but would rather assign them to another evaluator, you must cancel the user deletion, go to Evaluations in the admin panel, then manually remove them as an evaluator from each evaluation attributed to them (or add a different evaluator if they were the only one). Then you can delete that user.
+
+**Note:** If you delete the administrator user this way, you will need to complete the "First time setup" instructions for the server again.
+
+### Creating a new student
+Run the server, then open a web browser and navigate to <localhost:8000/admin>. After logging in, select Students, then in the top-right, hit "Add Student". Make sure to fill out all fields, then hit "Save".
+
+### Editing an existing student's data
+Run the server, then open a web browser and navigate to <localhost:8000/admin>. After logging in, select Students, then select the student you want to edit. Make the changes, then hit "Save".
+
+### Deleting a student
+Run the server, then open a web browser and navigate to <localhost:8000/admin>. After logging in, select Students, then hit the checkbox next to the students you want to delete. Find the dropdown at the top of the list titled "Actions", select "Delete selected students", then hit "Go". If this student has had any evaluations created for them, these must also be deleted, so the admin panel will ask you to confirm this.
