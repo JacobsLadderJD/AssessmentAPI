@@ -120,12 +120,12 @@ default_eval = {
 
     # Default Reflex Section
     "reflex_default": {
-        "moro": {"comment": "", "type": "Integration", "upper": True, "lower": None},
-        "spinalGalant": {"comment": "", "type": "Integration", "left": False, "right": True},
-        "crossedExtensor": {"comment": "", "type": "Integration", "left": False, "right": True},
-        "spinalPerez": {"comment": "", "type": "Integration", "left": False, "right": True},
-        "babinski": {"comment": "", "type": "Integration", "left": False, "right": True},
-        "asymmetricalTonic": {"comment": "", "type": "Integration", "left": False, "right": True},
+        "moro": {"comment": "", "type": "Integration", "upper": None, "lower": None},
+        "spinalGalant": {"comment": "", "type": "Integration", "left": None, "right": None},
+        "crossedExtensor": {"comment": "", "type": "Integration", "left": None, "right": None},
+        "spinalPerez": {"comment": "", "type": "Integration", "left": None, "right": None},
+        "babinski": {"comment": "", "type": "Integration", "left": None, "right": None},
+        "asymmetricalTonic": {"comment": "", "type": "Integration", "left": None, "right": None},
         "bauerCrawling": {"comment": "", "type": "Integration", "left": None, "right": None},
         "babkinPalmomental": {"comment": "", "type": "Integration", "left": None, "right": None},
         "handGrasping": {"comment": "", "type": "Integration", "left": None, "right": None},
