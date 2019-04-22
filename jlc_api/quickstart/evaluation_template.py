@@ -46,17 +46,44 @@ def validate_fields(in_section, valid_section):
             if validation_type == 'text':
                 valid = type(data) is str
             elif validation_type == 'Integration':
-                valid = (data is None) or \
-                        ((data is True) or (data is False))
+                if data is not None:
+                    if type(data) is not str:
+                        valid = False
+                    else:
+                        try:
+                            data = bool(data)
+                        except:
+                            valid = False
             elif validation_type == 'ChannelScore':
-                valid = (data is None) or \
-                        ((type(data) is int) and (data >= -3) and (data <= 3))
+                if data is not None:
+                    if type(data) is not str:
+                        valid = False
+                    else:
+                        try:
+                            data = int(data)
+                            valid = (data >= -3) and (data <= 3)
+                        except:
+                            valid = False
             elif validation_type == 'NegativeChannelScore':
-                valid = (data is None) or \
-                        ((type(data) is int) and (data >= -3) and (data <= 0))
+                if data is not None:
+                    if type(data) is not str:
+                        valid = False
+                    else:
+                        try:
+                            data = int(data)
+                            valid = (data >= -3) and (data <= 0)
+                        except:
+                            valid = False
             elif validation_type == 'PositiveChannelScore':
-                valid = (data is None) or \
-                        ((type(data) is int) and (data >= 0) and (data <= 3))
+                if data is not None:
+                    if type(data) is not str:
+                        valid = False
+                    else:
+                        try:
+                            data = int(data)
+                            valid = (data >= 0) and (data <= 3)
+                        except:
+                            valid = False
             elif validation_type == 'OptionNegativeChannelScore':
                 # This one is a weird exception to the rule that all
                 # fields but 'comment' and 'type' are validated the same
@@ -65,8 +92,15 @@ def validate_fields(in_section, valid_section):
                     valid = (data is True) or (data is False)
                 else:
                     # Validated as NegativeChannelScore
-                    valid = (data is None) or \
-                            ((type(data) is int) and (data >= -3) and (data <= 0))
+                    if data is not None:
+                        if type(data) is not str:
+                            valid = False
+                        else:
+                            try:
+                                data = int(data)
+                                valid = (data >= -3) and (data <= 0)
+                            except:
+                                valid = False
             
             # Report failed validation
             if valid is False:
