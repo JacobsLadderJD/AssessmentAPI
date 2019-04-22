@@ -87,6 +87,26 @@ class EvaluationSerializer(serializers.ModelSerializer):
         evaluation_template.validate_section('sensitivities', value)
         return value
 
+    # Ensure editedAt is updated when update is successful
+    def update(self, instance, validated_data):
+        today = datetime.date.today()
+        instance = super().update(instance, validated_data)
+        print('before')
+        instance.editedAt = today
+        instance.save()
+        print('after')
+        return instance
+
+    # Ensure editedAt is updated when partial_update is successful
+    def partial_update(self, instance, validated_data):
+        today = datetime.date.today()
+        instance = super().partial_update(instance, validated_data)
+        print('beforep')
+        instance.editedAt = today
+        instance.save()
+        print('afterp')
+        return instance
+
 class EvaluationRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluation
