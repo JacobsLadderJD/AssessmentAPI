@@ -73,19 +73,3 @@ class EvaluationViewSet(viewsets.ModelViewSet):
         else:
             return local_serializers.EvaluationSerializer
 
-# Returns students with the substring included their name
-def studentsWithName(request, substring):
-
-    # If there is a partial student name to search
-    if substring:
-        # QuerySet of student with substring in first or last name
-        students = models.Student.objects.filter( \
-                Q(firstname__icontains=substring) | \
-                Q(lastname__icontains=substring))
-    else:
-        # If no substring to match, QuerySet of all students
-        students = models.Student.objects.all()
-
-    serialized = serializers.serialize('json', students, \
-            fields=('firstname','lastname'))
-    return HttpResponse(serialized)
