@@ -84,17 +84,20 @@ def exportEvaluation(request, eval_id):
 
     # Get the evaluation with that id
     try:
+        if eval_id[-1] == '/':
+            eval_id = eval_id[:-1]
         evaluation = models.Evaluation.objects.get(pk=int(eval_id))
     except:
         return HttpResponseBadRequest('No evaluation found with that id.')
 
+    filename = evaluation.student.lastName + evaluation.student.firstName \
+            + str(evaluation.createdAt)
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '.csv"'
 
-    # Get just the sections of the evaluation
+    # Get just the sections of the evaluation in the order they should be in csv
     sections = [
             evaluation.notesSection,
-            evaluation.reflexSection,
             evaluation.tactilitySection,
             evaluation.auditorySection,
             evaluation.visualSection,
@@ -102,13 +105,21 @@ def exportEvaluation(request, eval_id):
             evaluation.languageSection,
             evaluation.mobilitySection,
             evaluation.sensorySection,
-            evaluation.sensitivitiesSection
+            evaluation.sensitivitiesSection,
+            evaluation.reflexSection
     ]
 
-    sections = [section for section in sections if 'startRow' in section]
-
+    # Write to CSV
     writer = csv.writer(response)
-    writer.writerow(sections)
+
+    for section in sections:  # The individual section dict
+        for subsection in section:  # The part of that subsection
+            for field in section[subsection]:  # The individual question
+                if field not in ['type']:
+                    if section[subsection][field]:
+                        writer.writerow([subsection,field,section[subsection][field]])
+                    else:
+                        writer.writerow([subsection,field])
 
     return response
 
