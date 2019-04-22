@@ -60,7 +60,8 @@ class EvaluatorViewSet(viewsets.ModelViewSet):
             return local_serializers.EvaluatorListSerializer
 
 class EvaluationViewSet(viewsets.ModelViewSet):
-    queryset = models.Evaluation.objects.all().order_by('editedAt', 'createdAt')
+    queryset = models.Evaluation.objects.all().order_by('-editedAt', \
+            'student__lastName', 'student__firstName', '-createdAt')
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
